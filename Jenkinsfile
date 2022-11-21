@@ -13,14 +13,14 @@ pipeline {
                 script {
                     repoObject = readJSON text: "$repository"
                     repoName = repoObject.name
-                    rcVersion = readJSON text: "$ref"
+                    #rcVersion = ref
                     
                     if (repoName.contains("-")) {
                         repoName = repoName.replace("-", "_")
                     }
                     
                     repoName = repoName.toLowerCase()
-                    currentBuild.displayName = "${BUILD_NUMBER}-repo-${repoName}-rc-${rcVersion}"
+                    currentBuild.displayName = "${BUILD_NUMBER}-repo-${repoName}"
 
                      
                 }
