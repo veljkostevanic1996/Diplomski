@@ -3,7 +3,7 @@ def prObject = ""
 def repoObject = ""
 def rcVersion = ""
 def repoName = ""
-
+List<Map> parametersStatic = new ArrayList<Map>()
 
 pipeline {
     agent any
