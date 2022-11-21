@@ -1,0 +1,50 @@
+pipeline {
+    agent {label "static-agent"}
+    options {
+        buildDiscarder(logRotator(numToKeepStr:'10'))
+        disableConcurrentBuilds()
+    }
+    stages {
+        
+        stage("Cloning") {
+            steps{
+                git url:'https://github.com/imilos/pakrunner.git'
+            }    
+        }
+        
+        stage("Set build name") {
+            steps{
+                script{
+                    currentBuild.displayName = "${BUILD_TAG}"
+                }
+            }    
+        }
+        
+        stage('Run the Image Creator'){
+            steps{
+                script{
+                    withCredentials([usernamePassword(credentialsId:'DockerHub', usernameVariable: 'DTR_USER', passwordVariable: 'DTR_PASS')]){
+                        sh """
+                          ls
+                          
+                          #login to DTR
+                          docker login --username $DTR_USER --password $DTR_PASS
+                          
+                          #delete image
+                          docker rmi vstevanic/diplomski:1.0
+                          
+                          #build the image
+                          docker build -t vstevanic/diplomski:1.0 .
+
+                          #push the image
+                          docker push vstevanic/diplomski:1.0
+
+                            """
+                        
+                    }
+                    
+                }
+            }
+        }
+    }
+}
