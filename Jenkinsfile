@@ -11,16 +11,13 @@ pipeline {
         stage("Initialize variables") {
             steps {
                 script {
-                    repoObject = new groovy.json.JsonSlurperClassic().parseText(repository)
+                    repoObject = readJSON text: "$repository"
                     repoName = repoObject.name
                     rcVersion = ref
                     
                     if (repoName.contains("-")) {
                         repoName = repoName.replace("-", "_")
                     }
-                    if (repoName.equals("sa_isaport")) {
-				                repoName = "isaport"
-			              }
                     
                     repoName = repoName.toLowerCase()
                     currentBuild.displayName = "${BUILD_NUMBER}-repo-${repoName}-rc-${rcVersion}"
