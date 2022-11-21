@@ -3,7 +3,7 @@ def prObject = ""
 def repoObject = ""
 def rcVersion = ""
 def repoName = ""
-List<Map> parametersStatic = new ArrayList<Map>()
+//List<Map> parametersStatic = new ArrayList<Map>()
 
 pipeline {
     agent any
@@ -29,9 +29,9 @@ pipeline {
         stage("Run static_code_analysis job") {
           steps {
             script {
-                parametersStatic.add([$class: 'StringParameterValue', name: 'REPO', value: repoName])
-                parametersStatic.add([$class: 'StringParameterValue', name: 'BRANCH', value: "master"])
-                parametersStatic.add([$class: 'StringParameterValue', name: 'VERSION', value: rcVersion])
+                //parametersStatic.add([$class: 'StringParameterValue', name: 'REPO', value: repoName])
+                //parametersStatic.add([$class: 'StringParameterValue', name: 'BRANCH', value: "master"])
+                //parametersStatic.add([$class: 'StringParameterValue', name: 'VERSION', value: rcVersion])
 
                 build job: test
               
