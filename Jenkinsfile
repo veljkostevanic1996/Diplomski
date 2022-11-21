@@ -13,7 +13,7 @@ pipeline {
                 script {
                     repoObject = readJSON text: "$repository"
                     repoName = repoObject.name
-                    rcVersion = ref
+                    rcVersion = readJSON text: "$ref"
                     
                     if (repoName.contains("-")) {
                         repoName = repoName.replace("-", "_")
