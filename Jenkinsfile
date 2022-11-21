@@ -33,7 +33,7 @@ pipeline {
                 //parametersStatic.add([$class: 'StringParameterValue', name: 'BRANCH', value: "master"])
                 //parametersStatic.add([$class: 'StringParameterValue', name: 'VERSION', value: rcVersion])
 
-                build job: "try-to-build"
+                build job: "Pakrunner-build"
               
             }
           }
