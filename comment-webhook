@@ -11,7 +11,7 @@ pipeline {
             steps {
                 script {
                     commentObject = readJSON text: "$comment"
-                    println(commentObject)
+                    println(commentObject.body)
                 }
             }
         } // end
