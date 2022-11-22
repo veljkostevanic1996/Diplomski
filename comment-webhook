@@ -10,18 +10,8 @@ pipeline {
         stage("Initialize variables") {
             steps {
                 script {
-                    repoObject = readJSON text: "$repository"
-                    repoName = repoObject.name
-                    //rcVersion = ref
-                    
-                    if (repoName.contains("-")) {
-                        repoName = repoName.replace("-", "_")
-                    }
-                    
-                    repoName = repoName.toLowerCase()
-                    currentBuild.displayName = "${BUILD_NUMBER}-repo-${repoName}"
-
-                     
+                    commentObject = readJSON text: "$comment"
+                    println(commentObject)
                 }
             }
         } // end
