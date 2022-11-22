@@ -1,4 +1,4 @@
-def comment
+def pom
 //List<Map> parametersStatic = new ArrayList<Map>()
 
 pipeline {
@@ -8,15 +8,15 @@ pipeline {
             steps {
                 script {
                     commentObject = readJSON text: "$comment"
-                    comment = commentObject.body
-                    println(comment)
+                    pom = commentObject.body
+                    println(pom)
                 }
             }
         } // end
         stage("Run static_code_analysis job") {
           steps {
             script {
-                if (comment.contains("!smallTest"))
+                if (pom.contains("!smallTest"))
                 build job: "Pakrunner-test"
             }
           }
