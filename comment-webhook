@@ -9,7 +9,7 @@ pipeline {
                 script {
                     commentObject = readJSON text: "$comment"
                     comment = commentObject.body
-                    println(commentObject.body)
+                    println(comment)
                 }
             }
         } // end
