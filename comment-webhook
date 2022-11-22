@@ -21,7 +21,7 @@ pipeline {
                 //parametersStatic.add([$class: 'StringParameterValue', name: 'REPO', value: repoName])
                 //parametersStatic.add([$class: 'StringParameterValue', name: 'BRANCH', value: "master"])
                 //parametersStatic.add([$class: 'StringParameterValue', name: 'VERSION', value: rcVersion])
-
+                println("redim")
                 //build job: "Pakrunner-build"
               
             }
