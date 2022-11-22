@@ -1,7 +1,4 @@
-def prObject = ""
-def repoObject = ""
-def rcVersion = ""
-def repoName = ""
+def comment
 //List<Map> parametersStatic = new ArrayList<Map>()
 
 pipeline {
@@ -11,6 +8,7 @@ pipeline {
             steps {
                 script {
                     commentObject = readJSON text: "$comment"
+                    comment = commentObject.body
                     println(commentObject.body)
                 }
             }
@@ -18,12 +16,8 @@ pipeline {
         stage("Run static_code_analysis job") {
           steps {
             script {
-                //parametersStatic.add([$class: 'StringParameterValue', name: 'REPO', value: repoName])
-                //parametersStatic.add([$class: 'StringParameterValue', name: 'BRANCH', value: "master"])
-                //parametersStatic.add([$class: 'StringParameterValue', name: 'VERSION', value: rcVersion])
-                println("redim")
-                //build job: "Pakrunner-build"
-              
+                if (comment.contains("!smallTest"))
+                build job: "Pakrunner-test"
             }
           }
         }
