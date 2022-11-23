@@ -30,7 +30,7 @@ pipeline {
                 //parametersStatic.add([$class: 'StringParameterValue', name: 'BRANCH', value: "master"])
                 //parametersStatic.add([$class: 'StringParameterValue', name: 'VERSION', value: rcVersion])
                 
-                println("PR action -> $action \n pull_request -> $prObject.merged")
+                println("PR action -> $action \nmerged -> $prObject.merged")
                 if (action == "closed" && prObject.merged){  
                     build job: "Pakrunner-build"
                 }
