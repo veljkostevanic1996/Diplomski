@@ -1,8 +1,8 @@
 
 def prObject = ""
 def repoObject = ""
-def rcVersion = ""
 def repoName = ""
+def state = ""
 //List<Map> parametersStatic = new ArrayList<Map>()
 
 pipeline {
@@ -13,12 +13,9 @@ pipeline {
                 script {
                     repoObject = readJSON text: "$repository"
                     repoName = repoObject.name
-                    //rcVersion = ref
-                    
-                    if (repoName.contains("-")) {
-                        repoName = repoName.replace("-", "_")
-                    }
-                    
+                    prObject = readJSON text: "$pull_request"
+                    state = prObject.merged
+                  
                     repoName = repoName.toLowerCase()
                     currentBuild.displayName = "${BUILD_NUMBER}-repo-${repoName}"
 
@@ -32,8 +29,11 @@ pipeline {
                 //parametersStatic.add([$class: 'StringParameterValue', name: 'REPO', value: repoName])
                 //parametersStatic.add([$class: 'StringParameterValue', name: 'BRANCH', value: "master"])
                 //parametersStatic.add([$class: 'StringParameterValue', name: 'VERSION', value: rcVersion])
-
-                build job: "Pakrunner-build"
+                
+                println(prObject.merged)
+                if (action == "closed" && prObject.merged){  
+                    build job: "Pakrunner-build"
+                }
               
             }
           }
