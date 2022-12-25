@@ -19,8 +19,8 @@ pipeline {
         stage('Build') {
             steps {
                 catchError(buildResult: null, catchInterruptions: false) {
-                     maven(maven : 'Maven_3.5.2'){
-                        bat "mvn clean verify"
+                     withMaven() {
+                        sh 'mvn clean verify' // -> Tests run: 1, Failures: 1, Errors: 0, Skipped: 0
                     }
                 }
             }
