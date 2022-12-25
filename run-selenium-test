@@ -8,7 +8,7 @@ pipeline {
         
         stage("Cloning") {
             steps{
-                git url:'https://github.com/veljkostevanic1996/pakrunner.git'
+                git url:'https://github.com/veljkostevanic1996/branko-selenium-tests.git'
             }    
         }
         
