@@ -11,7 +11,7 @@ pipeline {
                 git url:'https://github.com/veljkostevanic1996/branko-selenium-tests.git'
             }    
         }
-        
+        /*
         stage('Build') {
             steps {
                 catchError(buildResult: null, catchInterruptions: false) {
@@ -28,5 +28,6 @@ pipeline {
                 }
             }
         }
+        */
     }
 }
