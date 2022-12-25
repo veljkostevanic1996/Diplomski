@@ -9,7 +9,7 @@ pipeline {
          stage('Checkout external proj') {
             steps {
                 git branch: 'main',
-                    credentialsId: 'veljko-git',
+                    credentialsId: 'git',
                     url: 'https://github.com/veljkostevanic1996/branko-selenium-tests.git'
 
                 sh "ls -lat"
