@@ -1,0 +1,32 @@
+pipeline {
+    agent any
+    options {
+        buildDiscarder(logRotator(numToKeepStr:'10'))
+        disableConcurrentBuilds()
+    }
+    stages {
+        
+        stage("Cloning") {
+            steps{
+                git url:'https://github.com/veljkostevanic1996/pakrunner.git'
+            }    
+        }
+        
+        stage('Build') {
+            steps {
+                catchError(buildResult: null, catchInterruptions: false) {
+                    withMaven() {
+                        sh 'mvn clean verify' // -> Tests run: 1, Failures: 1, Errors: 0, Skipped: 0
+                    }
+                }
+            }
+
+            post {
+                always {
+                    echo "CurrentResult: $currentBuild.currentResult" // -> UNSTABLE
+                    echo "Result: $currentBuild.result"               // -> UNSTABLE
+                }
+            }
+        }
+    }
+}
