@@ -1,5 +1,6 @@
 pipeline {
-    agent {label "static-agent"}
+    //agent {label "static-agent"}
+    agent any
     options {
         buildDiscarder(logRotator(numToKeepStr:'10'))
         disableConcurrentBuilds()
